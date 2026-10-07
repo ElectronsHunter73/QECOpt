@@ -38,6 +38,8 @@ def test_swap_rows_preserves_row_space():
     swapped = H.swap_rows(0, 1)
 
     assert H.same_row_space(swapped)
+
+    
 def test_overlap_matrix():
     H = GF2Matrix([
         [1, 1, 1, 0],
@@ -52,25 +54,3 @@ def test_overlap_matrix():
     ])
 
     assert np.array_equal(H.overlap_matrix(), expected)
-def test_row_add_weight_delta():
-    H = GF2Matrix([
-        [1, 1, 1, 0],
-        [1, 1, 0, 1],
-        [0, 1, 1, 1],
-    ])
-
-    assert H.row_add_weight_delta(0, 1) == -1
-def test_row_add_weight_delta_matches_actual_change():
-    H = GF2Matrix([
-        [1, 1, 1, 0],
-        [1, 1, 0, 1],
-        [0, 1, 1, 1],
-    ])
-
-    delta = H.row_add_weight_delta(0, 1)
-
-    H_new = H.add_row(0, 1)
-
-    actual_change = H_new.total_weight() - H.total_weight()
-
-    assert delta == actual_change

@@ -90,17 +90,6 @@ class GF2Matrix:
         data=self._data.astype(int)
         return data@ data.T
 
-    def row_add_weight_delta(self,target,source):
-        if target==source:
-            raise ValueError("Target and Source must be different rows")
-        if not (0 <= target < self.n_rows):
-            raise IndexError("Target is out of range")
-        if not (0 <= source < self.n_rows):
-            raise IndexError("Source is out of range")
-        overlap=self.overlap_matrix()
-        source_weight=overlap[source,source]
-        shared=overlap[target,source]
-        return int(source_weight - 2*shared)
     
     def __repr__(self):
         return f"GF2Matrix({self._data!r})"
